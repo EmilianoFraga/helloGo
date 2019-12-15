@@ -13,7 +13,7 @@ func main() {
     fmt.Println(varinfo(s))
     fmt.Println(varinfo(s[2]))
 
-    testPrimitiveTypes()
+    testIntegerPrimitiveTypes()
 }
 
 // Varinfo displays the value and type info of a variable
@@ -22,24 +22,24 @@ func varinfo(x interface{}) string {
 }
 
 // TestPrimitiveTypes just does... test primitive types
-func testPrimitiveTypes() {
-    var minI8    int8   = -0x80
-    var maxI8    int8   =  0x7f
-    var minI16   int16  = -0x8000
-    var maxI16   int16  =  0x7fff
-    var minI32   int32  = -0x80000000
-    var maxI32   int32  =  0x7fffffff
-    var minI64   int64  = -0x8000000000000000
-    var maxI64   int64  =  0x7fffffffffffffff
+func testIntegerPrimitiveTypes() {
+    var minI8   int8    = -0x80
+    var maxI8   int8    = 0x7f
+    var minI16  int16   = -0x8000
+    var maxI16  int16   = 0x7fff
+    var minI32  int32   = -0x80000000
+    var maxI32  int32   = 0x7fffffff
+    var minI64  int64   = -0x8000000000000000
+    var maxI64  int64   = 0x7fffffffffffffff
 
-    var minUI8    uint8   =  0x0
-    var maxUI8    uint8   =  0xff
-    var minUI16   uint16  =  0x0
-    var maxUI16   uint16  =  0xffff
-    var minUI32   uint32  =  0x0
-    var maxUI32   uint32  =  0xffffffff
-    var minUI64   uint64  =  0x0
-    var maxUI64   uint64  =  0xffffffffffffffff
+    var minUI8  uint8   = 0x0
+    var maxUI8  uint8   = 0xff
+    var minUI16 uint16  = 0x0
+    var maxUI16 uint16  = 0xffff
+    var minUI32 uint32  = 0x0
+    var maxUI32 uint32  = 0xffffffff
+    var minUI64 uint64  = 0x0
+    var maxUI64 uint64  = 0xffffffffffffffff
 
     fmt.Println(varinfo(minI8))
     fmt.Println(varinfo(maxI8))
