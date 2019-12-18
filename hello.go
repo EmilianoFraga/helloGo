@@ -20,4 +20,6 @@ func main() {
 	testConst()
 
 	testArrays()
+
+	testSlices()
 }
