@@ -18,4 +18,6 @@ func main() {
 	testFloatPrimitiveTypes()
 
 	testConst()
+
+	testArrays()
 }
