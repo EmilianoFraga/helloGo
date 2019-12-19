@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func testArrays() {
 	var arTen = [...] int{ 0, 1, 2, 3, 4 ,5 ,6 ,7 ,8 ,9 }
@@ -47,4 +50,40 @@ func testSlices() {
 	fmt.Println(varinfo(arBack))
 	fmt.Println(varinfo(sliceFront))
 	fmt.Println(varinfo(anotherSlice))
+
+	anotherSlice = sliceFront[3:]
+	fmt.Println(varinfo(arBack))
+	fmt.Println(varinfo(sliceFront))
+	fmt.Println(varinfo(anotherSlice))
+
+	for i, v := range arBack {
+		fmt.Printf("arBack[%d] = %d\n", i, v)
+	}
+
+	s := ""
+	for _, v := range arBack {
+		if len(s) > 0 {
+			s += ", "
+		}
+		s += strconv.Itoa(v)
+	}
+	s = "[" + s
+	s += "]"
+	fmt.Printf("arBack = %s\n", s)
+
+	s = ""
+	for i := range arBack {
+		if len(s) > 0 {
+			s += ", "
+		}
+		s += strconv.Itoa(arBack[i])
+	}
+	s = "[" + s
+	s += "]"
+	fmt.Printf("arBack = %s\n", s)
+
+    veggies := []string{ "potatoes", "tomatoes", "brinjal" }
+    fruits := []string{ "oranges", "apples" }
+    food := append( veggies, fruits... )
+	fmt.Println("food:", food)
 }
