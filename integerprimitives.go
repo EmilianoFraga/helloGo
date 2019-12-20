@@ -94,3 +94,7 @@ func testIntegerPrimitiveTypes() {
 	var byteIsUInt8 = maxUI8
 	fmt.Println(varinfo(byteIsUInt8))
 }
+
+func multiReturn(x int) (int, int) {
+	return x - 1, x + 1
+}

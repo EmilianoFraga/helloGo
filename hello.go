@@ -13,6 +13,15 @@ func main() {
 	fmt.Println(varinfo(s))
 	fmt.Println(varinfo(s[2]))
 
+	x, y := multiReturn(5)
+	fmt.Printf("Multi return: %d %d\n", x, y )
+
+	x, _ = multiReturn(9)
+	fmt.Printf("Multi return: %d %d\n", x, y )
+
+	_, y = multiReturn(20)
+	fmt.Printf("Multi return: %d %d\n", x, y )
+
 	testIntegerPrimitiveTypes()
 
 	testFloatPrimitiveTypes()
