@@ -26,6 +26,8 @@ func main() {
 	testMaps()
 
 	testIf()
-	
+
 	testSwitch()
+
+	testForOne()
 }
