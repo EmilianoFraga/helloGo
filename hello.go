@@ -33,4 +33,10 @@ func main() {
 	testSlices()
 
 	testMaps()
+
+	testIf()
+
+	testSwitch()
+
+	testForOne()
 }
