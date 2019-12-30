@@ -7,12 +7,12 @@ type Person struct {
 }
 
 // GetName returns the person name
-func (p *Person) GetName() string {
+func (p Person) GetName() string {
 	return p.name
 }
 
 // GetAge returns the person name
-func (p *Person) GetAge() uint8 {
+func (p Person) GetAge() uint8 {
 	return p.age
 }
 
