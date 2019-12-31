@@ -115,6 +115,8 @@ func assertRectSetDimensionError(t *testing.T, setterFunc func(value float64) er
 		t.Errorf("Expected error while setting one Rect dimension with value: %f", invalidValue)
 	}
 
+	getterFunc = getterGetterFunc()
+
 	// this also works.... ()() !!!!
 	// if actualValue := getterGetterFunc()(); actualValue != expectedValue {
 
