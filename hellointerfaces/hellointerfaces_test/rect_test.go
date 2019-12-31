@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+type getterFloat64 func() float64
+
+type setterFloat64 func(float64) error
+
 func TestCreateNewRect(t *testing.T) {
 	assertCreateNewRect(t, 2.0, 3.0)
 
@@ -26,14 +30,14 @@ func TestRectSetters(t *testing.T) {
 	// assertRectSetDimension(t, r.SetWidth, func() func() float64 { return r.GetWidth }, 3.5)
 
 	// getterGetterFunc is a function that returns a function that returns a float64
-	getterGetterFunc := func() func() float64 { return r.GetWidth }
+	getterGetterFunc := func() getterFloat64 { return r.GetWidth }
 	assertRectSetDimension(t, r.SetWidth, getterGetterFunc, 3.5)
 
 	assertRectSetDimension(t, r.SetWidth, getterGetterFunc, 0.0)
 
 	assertRectSetDimensionError(t, r.SetWidth, getterGetterFunc, -0.000001)
 
-	getterGetterFunc = func() func() float64 { return r.GetHeight }
+	getterGetterFunc = func() getterFloat64 { return r.GetHeight }
 	assertRectSetDimension(t, r.SetHeight, getterGetterFunc, 3.5)
 
 	assertRectSetDimension(t, r.SetHeight, getterGetterFunc, 0.0)
@@ -86,7 +90,10 @@ func assertCreateNewRectError(t *testing.T, expectedWidth float64, expectedHeigh
 	}
 }
 
-func assertRectSetDimension(t *testing.T, setterFunc func(value float64) error, getterGetterFunc func() func() float64, expectedValue float64) {
+// This also works: explicit function parameters
+// func assertRectSetDimension(t *testing.T, setterFunc func(value float64) error, getterGetterFunc func() func() float64, expectedValue float64) {
+
+func assertRectSetDimension(t *testing.T, setterFunc setterFloat64, getterGetterFunc func() getterFloat64, expectedValue float64) {
 	ok := setterFunc(expectedValue)
 
 	if ok != nil {
@@ -104,7 +111,7 @@ func assertRectSetDimension(t *testing.T, setterFunc func(value float64) error, 
 	}
 }
 
-func assertRectSetDimensionError(t *testing.T, setterFunc func(value float64) error, getterGetterFunc func() func() float64, invalidValue float64) {
+func assertRectSetDimensionError(t *testing.T, setterFunc setterFloat64, getterGetterFunc func() getterFloat64, invalidValue float64) {
 	getterFunc := getterGetterFunc()
 
 	previousValue := getterFunc()
