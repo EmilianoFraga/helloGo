@@ -44,6 +44,7 @@ func assertCreateNewCircle(t *testing.T, expectedRadius float64) {
 
 	if ok != nil {
 		t.Errorf("Error creating new Circle: %s", ok)
+		return
 	}
 
 	if actualRadius := c.GetRadius(); actualRadius != expectedRadius {
@@ -68,6 +69,7 @@ func assertSetCircleRadius(t *testing.T, c *hellointerfaces.Circle, expectedRadi
 
 	if ok != nil {
 		t.Errorf("Error setting radius: %s", ok)
+		return
 	}
 
 	if actualRadius := c.GetRadius(); actualRadius != expectedRadius {
