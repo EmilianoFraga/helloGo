@@ -1,8 +1,9 @@
 package hellointerfaces_test
 
 import (
-	"github.com/EmilianoFraga/helloGo/hellointerfaces"
 	"testing"
+
+	"github.com/EmilianoFraga/helloGo/hellointerfaces"
 )
 
 func assertGeometryArea(t *testing.T, g hellointerfaces.Geometry, expectedArea float64) {
