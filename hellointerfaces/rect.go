@@ -22,17 +22,17 @@ func CreateNewRect(width float64, height float64) (*Rect, error) {
 }
 
 // Area implements Geometry interface method
-func (r Rect) Area() float64 {
+func (r *Rect) Area() float64 {
 	return r.width * r.height
 }
 
 // Perim implements Geometry interface method
-func (r Rect) Perim() float64 {
+func (r *Rect) Perim() float64 {
 	return r.width + r.width + r.height + r.height
 }
 
 // GetWidth returns the rectangle width
-func (r Rect) GetWidth() float64 {
+func (r *Rect) GetWidth() float64 {
 	return r.width
 }
 
@@ -51,7 +51,7 @@ func (r *Rect) SetWidth(newWidth float64) error {
 }
 
 // GetHeight returns the rectangle height
-func (r Rect) GetHeight() float64 {
+func (r *Rect) GetHeight() float64 {
 	return r.height
 }
 
