@@ -26,23 +26,17 @@ func TestCreateNewRect(t *testing.T) {
 func TestRectSetters(t *testing.T) {
 	r, _ := hellointerfaces.CreateNewRect(2, 3)
 
-	// this also works... !!!
-	// assertRectSetDimension(t, r.SetWidth, func() func() float64 { return r.GetWidth }, 3.5)
+	assertRectSetDimension(t, r.SetWidth, r.GetWidth, 3.5)
 
-	// getterGetterFunc is a function that returns a function that returns a float64
-	getterGetterFunc := func() getterFloat64 { return r.GetWidth }
-	assertRectSetDimension(t, r.SetWidth, getterGetterFunc, 3.5)
+	assertRectSetDimension(t, r.SetWidth, r.GetWidth, 0.0)
 
-	assertRectSetDimension(t, r.SetWidth, getterGetterFunc, 0.0)
+	assertRectSetDimensionError(t, r.SetWidth, r.GetWidth, -0.000001)
 
-	assertRectSetDimensionError(t, r.SetWidth, getterGetterFunc, -0.000001)
+	assertRectSetDimension(t, r.SetHeight, r.GetHeight, 3.5)
 
-	getterGetterFunc = func() getterFloat64 { return r.GetHeight }
-	assertRectSetDimension(t, r.SetHeight, getterGetterFunc, 3.5)
+	assertRectSetDimension(t, r.SetHeight, r.GetHeight, 0.0)
 
-	assertRectSetDimension(t, r.SetHeight, getterGetterFunc, 0.0)
-
-	assertRectSetDimensionError(t, r.SetHeight, getterGetterFunc, -0.000001)
+	assertRectSetDimensionError(t, r.SetHeight, r.GetHeight, -0.000001)
 }
 
 func TestRectArea(t *testing.T) {
@@ -91,9 +85,9 @@ func assertCreateNewRectError(t *testing.T, expectedWidth float64, expectedHeigh
 }
 
 // This also works: explicit function parameters
-// func assertRectSetDimension(t *testing.T, setterFunc func(value float64) error, getterGetterFunc func() func() float64, expectedValue float64) {
+// func assertRectSetDimension(t *testing.T, setterFunc func(value float64) error, getterFunc func() float64, expectedValue float64) {
 
-func assertRectSetDimension(t *testing.T, setterFunc setterFloat64, getterGetterFunc func() getterFloat64, expectedValue float64) {
+func assertRectSetDimension(t *testing.T, setterFunc setterFloat64, getterFunc getterFloat64, expectedValue float64) {
 	ok := setterFunc(expectedValue)
 
 	if ok != nil {
@@ -101,19 +95,12 @@ func assertRectSetDimension(t *testing.T, setterFunc setterFloat64, getterGetter
 		return
 	}
 
-	getterFunc := getterGetterFunc()
-
-	// this also works.... ()() !!!!
-	// if actualValue := getterGetterFunc()(); actualValue != expectedValue {
-
 	if actualValue := getterFunc(); actualValue != expectedValue {
 		t.Errorf("Wrong rectangle dimention %f, expected %f", actualValue, expectedValue)
 	}
 }
 
-func assertRectSetDimensionError(t *testing.T, setterFunc setterFloat64, getterGetterFunc func() getterFloat64, invalidValue float64) {
-	getterFunc := getterGetterFunc()
-
+func assertRectSetDimensionError(t *testing.T, setterFunc setterFloat64, getterFunc getterFloat64, invalidValue float64) {
 	previousValue := getterFunc()
 
 	ok := setterFunc(invalidValue)
@@ -121,11 +108,6 @@ func assertRectSetDimensionError(t *testing.T, setterFunc setterFloat64, getterG
 	if ok == nil {
 		t.Errorf("Expected error while setting one Rect dimension with value: %f", invalidValue)
 	}
-
-	getterFunc = getterGetterFunc()
-
-	// this also works.... ()() !!!!
-	// if actualValue := getterGetterFunc()(); actualValue != expectedValue {
 
 	if actualValue := getterFunc(); actualValue != previousValue {
 		t.Errorf("Rect dimension shouldn't change after error. Actual %f, expected %f", actualValue, previousValue)
